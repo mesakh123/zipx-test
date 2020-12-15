@@ -18,6 +18,7 @@ def index(request):
             catchphrase = d['company']['catchPhrase']
             new_user = Users(name=name,email=email,catchphrase=catchphrase,username=username)
             new_user.save()
+        return redirect("/")
     elif "print" in request.POST:
         user_data = Users.objects.all()
     elif 'save' in request.POST:
