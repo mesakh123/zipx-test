@@ -1,0 +1,60 @@
+{%extends 'main/base.html'%}
+{%block content%}
+
+<div class="d-flex justify-content-center">
+  <form action="" method="POST" id="userForm">
+    {%csrf_token%}
+    <div class="form-group">
+      <label for="InputUsername">Username</label>
+      <input type="text" class="form-control" id="InputUsername" placeholder="Enter username" name='username'>
+    </div>
+    <div class="form-group">
+      <label for="InputCatchPhrase">Company Catchphrase </label>
+      <input type="text" class="form-control" id="InputCatchPhrase" placeholder="Enter company catchphrase" name='catchphrase'>
+    </div>
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary mt-1" name="save">Save</button>
+    </div>
+  </form>
+
+</div>
+
+
+
+<div class="col-12 d-flex justify-content-center  mt-2">
+  <form action="" method="post" >
+    {%csrf_token%}
+      <button type="submit" class="btn btn-primary mr-2" name="get">Get and Save</button>
+  </form>
+  {%if exists%}
+    <form action="" method="post" >
+      {%csrf_token%}
+        <button type="submit" class="btn btn-secondary" name="print">Print Users</button>
+    </form>
+  {%endif%}
+</div>
+
+{%if user_data%}
+<div class="text-center d-flex justify-content-center">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Username</th>
+        <th scope="col">Catchphrase</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for d in user_data%}
+      <tr>
+        <th scope="row">{{forloop.counter}}</th>
+        <td>{{d.username}}</td>
+        <td>{{d.catchphrase}}</td>
+      </tr>
+      {%endfor%}
+    </tbody>
+  </table>
+</div>
+
+{%endif%}
+{%endblock%}
